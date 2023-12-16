@@ -1,1 +1,7 @@
-<p>image-gif works!</p>
+<div class="loading" #divIntersectContainer [class.is-loading]="loading">
+    <div class="lds-ripple" *ngIf="loading">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<img #imageEl class="hidden" [attr.data-imageSrc]="imageSource" />

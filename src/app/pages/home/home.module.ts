@@ -6,6 +6,8 @@ import { HomeComponent } from './home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { SuggestComponent } from 'src/app/common-modules/suggest/suggest.component';
+import { ListGifComponent } from 'src/app/common-modules/list-gif/list-gif.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ButtonModule } from 'primeng/button';
     HomeRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    SuggestComponent,
+    ListGifComponent
   ]
 })
 export class HomeModule { }

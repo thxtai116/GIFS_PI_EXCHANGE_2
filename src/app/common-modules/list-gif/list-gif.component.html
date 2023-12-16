@@ -1,1 +1,39 @@
-<p>list-gif works!</p>
+<div class="gird-custom"
+     infiniteScroll
+     [infiniteScrollDistance]="1.5"
+     [infiniteScrollUpDistance]="1.5"
+     [infiniteScrollThrottle]="350"
+     (scrolled)="onScrolled()">
+    <ng-container *ngFor="let item of items">
+        <div class="gird-custom-item gif-card-container w-full bg-white mb-4">
+            <div class="gif-card-layer w-full">
+                <div class="gif-card-item">
+                    <app-image-gif [imageSource]="item?.images?.downsized?.url"
+                                      (click)="viewDetail.emit(item)"></app-image-gif>
+                </div>
+            </div>
+            <div class="gif-footer-card"
+                 fxLayout="row"
+                 fxLayoutAlign="space-between center">
+                <div class="content-left">
+                    <img [src]="item?.user?.avatar_url ?? '../../../../assets/img/default.png'"
+                         alt="Image">
+                    <span *ngIf="item?.title"
+                          (click)="viewDetail.emit(item)">{{item?.title}}</span>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<ng-container *ngIf="updating">
+    <ng-container [ngTemplateOutlet]="loadMoreTemplate"></ng-container>
+</ng-container>
+
+<ng-template #loadingTemmplate>
+    <app-image-loading></app-image-loading>
+</ng-template>
+
+<ng-template #loadMoreTemplate>
+    <app-image-loading [countLoading]="countLoadMore"></app-image-loading>
+</ng-template>
