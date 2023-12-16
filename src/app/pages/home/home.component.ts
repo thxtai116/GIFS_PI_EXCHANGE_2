@@ -88,7 +88,7 @@ export class HomeComponent {
         this.loading = false;
       })
     }else{
-      this.gifServiceService.getTrending$({ limit: this.pagination.count, offset: this.pagination.offset }).subscribe(data => {
+      this.gifServiceService.getTrending$({ limit: this.pagination.count, offset: this.pagination.offset + this.pagination.count }).subscribe(data => {
         console.log("gifServiceService", data);
         this.items = this.items.concat(data.data);
         this.pagination = data.pagination;
