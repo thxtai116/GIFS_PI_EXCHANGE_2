@@ -16,6 +16,7 @@ export class HomeComponent {
   public trendingKeyword!: string[]
   public items:any =[];
   public loading = false;
+  private LIMIT = 20;
   constructor(private gifServiceService: GifServiceService) {
   }
 
@@ -34,9 +35,9 @@ export class HomeComponent {
 
   private loadData() {
     this.loading = true;
-    this.gifServiceService.getTrending$({ limit: this.pagination.count, offset: this.pagination.offset }).subscribe(data => {
-      console.log("gifServiceService", data);
+    this.gifServiceService.getTrending$({ limit: this.LIMIT, offset: this.LIMIT }).subscribe(data => {
       this.items = data.data;
+      this.pagination = data.pagination;
       this.loading = false;
     })
 
@@ -56,10 +57,12 @@ export class HomeComponent {
     })
     let params = {
       q: event.trim(),
-      limit: 20,
+      limit: this.LIMIT,
+      offset: this.pagination.offset,
     };
     this.loading = true;
     this.gifServiceService.searchByTrendingKeyword$(params).subscribe(data=>{
+      this.pagination = data.pagination;
       this.items = data.data;
       this.loading = false;
     })
@@ -72,5 +75,26 @@ export class HomeComponent {
 
   onScrolling() {
     //this.__gifFacade.search({ offset: this.pagination.count + this.pagination.offset, limit: LIMIT, q: this.searchControl.value }, false, this.reloadTags).subscribe({})
+    let params = {
+      q: this.keySearch.trim(),
+      limit: this.LIMIT,
+      offset: this.pagination.count + this.pagination.offset,
+    };
+    this.loading = true;
+    if(this.keySearch.trim()){
+      this.gifServiceService.searchByTrendingKeyword$(params).subscribe(data=>{
+        this.items = this.items.concat(data.data);
+        this.pagination = data.pagination;
+        this.loading = false;
+      })
+    }else{
+      this.gifServiceService.getTrending$({ limit: this.pagination.count, offset: this.pagination.offset }).subscribe(data => {
+        console.log("gifServiceService", data);
+        this.items = this.items.concat(data.data);
+        this.pagination = data.pagination;
+        this.loading = false;
+      })
+    }
+ 
   }
 }
