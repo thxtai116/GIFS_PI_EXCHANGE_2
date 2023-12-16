@@ -1,11 +1,11 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-
+import { SkeletonModule } from 'primeng/skeleton';
 @Component({
   selector: 'app-image-gif',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SkeletonModule ],
   templateUrl: './image-gif.component.html',
   styleUrls: ['./image-gif.component.scss']
 })

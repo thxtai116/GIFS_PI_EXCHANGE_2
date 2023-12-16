@@ -1,1 +1,37 @@
-<p>gif-detail works!</p>
+<h4 class="confirm-dialog-title">{{data.title}}</h4>
+<div class="confirm-dialog-content">
+    <div>
+        <div>
+            <img [src]="data.images?.downsized?.url"
+                 class="border-image"
+                 alt="Image">
+        </div>
+        <div class="px-4 content-footer">
+            <div class="mb-2"
+                 *ngIf="data.title">
+                <span class="left-content">Title: </span>{{data.title}}
+            </div>
+            <div class="mb-2"
+                 *ngIf="data.rating">
+                <span class="left-content">Rating: </span>{{data.rating}}
+            </div>
+            <div class="mb-2"
+                 *ngIf="data.trending_datetime">
+                <span class="left-content">Trending time: </span>{{data.trending_datetime | date:"shortDate"}}
+            </div>
+            <ng-container *ngIf="data.username">
+                <div class="mb-2">
+                    <span class="left-content">Username: </span> {{data.username}}
+                </div>
+                <div class="mb-2"
+                     *ngIf="data.user?.profile_url">
+                    <span class="left-content">Profile link:</span>
+
+                    <a class="cursor-pointer"
+                       (click)="toProfile(data.user.profile_url)">
+                        {{data.user.profile_url}}</a>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

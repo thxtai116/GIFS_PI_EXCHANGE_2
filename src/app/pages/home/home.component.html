@@ -1,17 +1,25 @@
-<div class="p-inputgroup">
-    <input type="text"
-           pInputText
-           placeholder="Search ..."
-           [(ngModel)]="keySearch" />
-    <button type="button"
-            pButton
-            icon="pi pi-search"
-            styleClass="p-button-warn"
-            (click)="searchData()"></button>
+<div class="pt-4 w-100"></div>
+<div class="top-header">
+    <div class="p-inputgroup">
+        <input type="text"
+               pInputText
+               placeholder="Search ..."
+               [(ngModel)]="keySearch" />
+        <button type="button"
+                pButton
+                icon="pi pi-search"
+                styleClass="p-button-warn"
+                (click)="searchData()"></button>
+    </div>
+    <div>
+        <app-suggest></app-suggest>
+    </div>
+    <div class="pt-4 w-100"></div>
+
 </div>
-<div>
-    <app-suggest></app-suggest>
-</div>
-<div>
-    <app-list-gif></app-list-gif>
+
+<div class="mt-4">
+    <app-list-gif [items]="items"
+                  [countLoadMore]="12"
+                  (scrollEvent)="onScrolling()"></app-list-gif>
 </div>

@@ -8,18 +8,17 @@
         <div class="gird-custom-item gif-card-container w-full bg-white mb-4">
             <div class="gif-card-layer w-full">
                 <div class="gif-card-item">
-                    <app-image-gif [imageSource]="item?.images?.downsized?.url"
-                                      (click)="viewDetail.emit(item)"></app-image-gif>
+                    <app-image-gif [imageSource]="item?.images?.downsized?.url" [style]="{'display':'contents'}"
+                                   (click)="showDetail(item)"></app-image-gif>
                 </div>
             </div>
-            <div class="gif-footer-card"
-                 fxLayout="row"
-                 fxLayoutAlign="space-between center">
-                <div class="content-left">
+            <div class="gif-footer-card">
+                <div class="content-left"
+                     pTooltip="{{item?.title}}"
+                     tooltipPosition="top"
+                     (click)="showDetail(item)">
                     <img [src]="item?.user?.avatar_url ?? '../../../../assets/img/default.png'"
                          alt="Image">
-                    <span *ngIf="item?.title"
-                          (click)="viewDetail.emit(item)">{{item?.title}}</span>
                 </div>
             </div>
         </div>
