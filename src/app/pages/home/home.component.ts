@@ -15,6 +15,7 @@ export class HomeComponent {
   };
   public trendingKeyword!: string[]
   public items:any =[];
+  public loading = false;
   constructor(private gifServiceService: GifServiceService) {
   }
 
@@ -32,9 +33,11 @@ export class HomeComponent {
   }
 
   private loadData() {
+    this.loading = true;
     this.gifServiceService.getTrending$({ limit: this.pagination.count, offset: this.pagination.offset }).subscribe(data => {
       console.log("gifServiceService", data);
       this.items = data.data;
+      this.loading = false;
     })
 
     this.gifServiceService.getTrendingKeyword().subscribe(data => {
@@ -55,8 +58,10 @@ export class HomeComponent {
       q: event.trim(),
       limit: 20,
     };
+    this.loading = true;
     this.gifServiceService.searchByTrendingKeyword$(params).subscribe(data=>{
       this.items = data.data;
+      this.loading = false;
     })
   }
 

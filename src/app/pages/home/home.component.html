@@ -14,8 +14,11 @@
     </div>
     <div>
         <app-suggest [keywords]="trendingKeyword"
-                     (eventChange)="selectTag($event)"></app-suggest>
+                     (eventChange)="selectTag($event)">
+            <span class="loader" [hidden]="!loading"></span>
+        </app-suggest>
     </div>
+
     <div class="pt-4 w-100"></div>
 
 </div>
