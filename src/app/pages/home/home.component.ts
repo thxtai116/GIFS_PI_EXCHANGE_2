@@ -19,6 +19,13 @@ export class HomeComponent {
   }
 
   public searchData(){
+    let search = this.keySearch;
+    search = search.trim();
+    if(search){
+      this.selectTag(search);
+    }else{
+      this.loadData();
+    }
   }
   ngOnInit(): void {
     this.loadData();

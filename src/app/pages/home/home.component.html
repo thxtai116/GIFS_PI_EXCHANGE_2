@@ -4,6 +4,7 @@
         <input type="text"
                pInputText
                placeholder="Search ..."
+               (keyup.enter)="searchData()"
                [(ngModel)]="keySearch" />
         <button type="button"
                 pButton
