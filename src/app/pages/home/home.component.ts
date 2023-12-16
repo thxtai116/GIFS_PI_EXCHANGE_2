@@ -58,7 +58,7 @@ export class HomeComponent {
     let params = {
       q: event.trim(),
       limit: this.LIMIT,
-      offset: this.pagination.offset,
+      offset: this.LIMIT,
     };
     this.loading = true;
     this.gifServiceService.searchByTrendingKeyword$(params).subscribe(data=>{
