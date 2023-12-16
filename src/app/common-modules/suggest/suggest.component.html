@@ -1,5 +1,5 @@
-<div class="">
+<div class="bg-suggest">
     <ng-container *ngFor=" let item of keywords">
-        <p-button label="{{item}}" [rounded]="true" (click)="selectItem(item)"></p-button>
+        <p-button  label="{{item}}" [text]="true" [raised]="true" severity="secondary" (click)="selectItem(item)"></p-button>
     </ng-container>
 </div>

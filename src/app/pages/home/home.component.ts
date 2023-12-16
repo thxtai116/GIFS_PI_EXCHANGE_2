@@ -13,6 +13,7 @@ export class HomeComponent {
     offset: null,
     total_count: null
   };
+  public trendingKeyword!: string[]
   public items:any =[];
   constructor(private gifServiceService: GifServiceService) {
   }
@@ -28,6 +29,14 @@ export class HomeComponent {
       console.log("gifServiceService", data);
       this.items = data.data;
     })
+
+    this.gifServiceService.getTrendingKeyword().subscribe(data => {
+      this.trendingKeyword = data.data;
+    })
+  }
+
+  public selectTag(event:any){
+
   }
 
 

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 
@@ -10,7 +9,8 @@ import { ButtonModule } from 'primeng/button';
   imports: [CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    ButtonModule],
+    ButtonModule
+    ],
   templateUrl: './suggest.component.html',
   styleUrls: ['./suggest.component.scss']
 })

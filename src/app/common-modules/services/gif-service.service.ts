@@ -13,6 +13,7 @@ export class GifServiceService {
   private apiKey = environment.apiKey;
   constructor(private http: HttpClient) { }
   URL = `${GLOBAL_SETTINGS.domain}/${GLOBAL_SETTINGS.apiVersion}/gifs/`
+  URLTAG = `${GLOBAL_SETTINGS.domain}/${GLOBAL_SETTINGS.apiVersion}/trending/`
 
   getGifList$(options: HTTPParams) {
     options['type'] = TypeData.GIF;
@@ -30,6 +31,10 @@ export class GifServiceService {
   }
   getTags(term?: string) {
     return this.getItems<string>(`${this.URL}${term}`, {})
+  }
+
+  getTrendingKeyword() {
+    return this.getItems<string>(`${this.URLTAG}searches`, {});
   }
 
   searchByTrendingKeyword$(options?:HTTPParams){
