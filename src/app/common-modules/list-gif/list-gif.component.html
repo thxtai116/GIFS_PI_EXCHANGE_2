@@ -25,14 +25,3 @@
     </ng-container>
 </div>
 
-<ng-container *ngIf="updating">
-    <ng-container [ngTemplateOutlet]="loadMoreTemplate"></ng-container>
-</ng-container>
-
-<ng-template #loadingTemmplate>
-    <app-image-loading></app-image-loading>
-</ng-template>
-
-<ng-template #loadMoreTemplate>
-    <app-image-loading [countLoading]="countLoadMore"></app-image-loading>
-</ng-template>

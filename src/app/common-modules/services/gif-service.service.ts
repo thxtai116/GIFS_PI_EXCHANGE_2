@@ -13,7 +13,8 @@ export class GifServiceService {
   private apiKey = environment.apiKey;
   constructor(private http: HttpClient) { }
   URL = `${GLOBAL_SETTINGS.domain}/${GLOBAL_SETTINGS.apiVersion}/gifs/`
-  URLTAG = `${GLOBAL_SETTINGS.domain}/${GLOBAL_SETTINGS.apiVersion}/trending/`
+  URL_TAG = `${GLOBAL_SETTINGS.domain}/${GLOBAL_SETTINGS.apiVersion}/trending/`
+  URL_TAG_RELATE = `${GLOBAL_SETTINGS.domain}/${GLOBAL_SETTINGS.apiVersion}/tags/related/`
 
   getGifList$(options: HTTPParams) {
     options['type'] = TypeData.GIF;
@@ -30,14 +31,14 @@ export class GifServiceService {
     return this.getItems<GIF>(`${this.URL}random`, options);
   }
   getTags(term?: string) {
-    return this.getItems<string>(`${this.URL}${term}`, {})
+    return this.getItems<string>(`${this.URL_TAG_RELATE}${term}`, {})
   }
 
   getTrendingKeyword() {
-    return this.getItems<string>(`${this.URLTAG}searches`, {});
+    return this.getItems<string>(`${this.URL_TAG}searches`, {});
   }
 
-  searchByTrendingKeyword$(options?:HTTPParams){
+  searchByTrendingKeyword$(options?: HTTPParams) {
     return this.getItems<GIF>(`${this.URL}search`, options);
   }
   loadGifList(options: HTTPParams) {
@@ -47,7 +48,7 @@ export class GifServiceService {
       })
     ).subscribe({
       next: (res) => {
-       return res;
+        return res;
       },
       error: (err) => {
         throw err
@@ -59,30 +60,31 @@ export class GifServiceService {
     params['api_key'] = this.apiKey;
     console.log('params...', params)
     if (options) {
-        if (options.limit) {
-            params['limit'] = options.limit;
-        };
-        if (options.rating) {
-            params['rating'] = options.rating;
-        };
-        if (options.lang) {
-            params['lang'] = options.lang;
-        };
-        if (options.offset) {
-            params['offset'] = options.offset;
-        };
-        if (options.q) {
-            params['q'] = options.q;
-        };
+      if (options.limit) {
+        params['limit'] = options.limit;
+      };
+      if (options.rating) {
+        params['rating'] = options.rating;
+      };
+      if (options.lang) {
+        params['lang'] = options.lang;
+      };
+      if (options.offset) {
+        params['offset'] = options.offset;
+      };
+      if (options.q) {
+        params['q'] = options.q;
+      };
 
-        if (options.type) {
-            params['type'] = options.type;
-        }
-        return this.http.get<HTTPResponseItems<T>>(url, { params: params })
+      if (options.type) {
+        params['type'] = options.type;
+      }
+      return this.http.get<HTTPResponseItems<T>>(url, { params: params })
     } else {
-        return this.http.get<HTTPResponseItems<T>>(url);
+      return this.http.get<HTTPResponseItems<T>>(url);
     };
-}
+  }
+  
 }
 export type HTTPParams = {
   limit?: number,

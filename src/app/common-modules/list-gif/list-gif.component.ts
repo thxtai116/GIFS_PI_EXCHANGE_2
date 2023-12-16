@@ -20,7 +20,7 @@ import { TooltipModule } from 'primeng/tooltip';
     DynamicDialogModule,
     TooltipModule
   ],
-  providers:[DialogService],
+  providers: [DialogService],
   templateUrl: './list-gif.component.html',
   styleUrls: ['./list-gif.component.scss']
 })
@@ -48,15 +48,12 @@ export class ListGifComponent {
     this.scrollEvent.emit();
   }
 
-  showDetail(data:any) {
-    this.ref = this.dialogService.open(GifDetailComponent, { 
-        data: data,
-        appendTo:'body',
-        dismissableMask:true,
-        maskStyleClass:'gif-detail',
+  showDetail(data: any) {
+    this.ref = this.dialogService.open(GifDetailComponent, {
+      data: data,
+      appendTo: 'body',
+      dismissableMask: true,
+      maskStyleClass: 'gif-detail',
     });
-}
-
-
-
+  }
 }

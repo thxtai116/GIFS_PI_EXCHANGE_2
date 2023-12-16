@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GifServiceService } from 'src/app/common-modules/services/gif-service.service';
+import { GifServiceService, HTTPParams } from 'src/app/common-modules/services/gif-service.service';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +36,24 @@ export class HomeComponent {
   }
 
   public selectTag(event:any){
+    this.gifServiceService.getTags(event).subscribe(data=>{
+      const arrTag = data.data;
+      if(arrTag && arrTag.length >0){
+        this.trendingKeyword = arrTag.map((x:any)=>x.name);
+      }else{
+        this.trendingKeyword = [];
+      }
+    })
+    let params = {
+      q: event.trim(),
+      limit: 20,
+    };
+    this.gifServiceService.searchByTrendingKeyword$(params).subscribe(data=>{
+      this.items = data.data;
+    })
+  }
+
+  private resultSearch(){
 
   }
 
